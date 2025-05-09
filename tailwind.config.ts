@@ -1,14 +1,8 @@
 
-import { fileURLToPath } from "url";
-import { dirname, resolve } from "path";
-import { Config } from "tailwindcss";
-import tailwindAnimate from "tailwindcss-animate";
-import tailwindTypography from "@tailwindcss/typography";
+import { type Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const config = {
+export default {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -16,7 +10,6 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -65,16 +58,19 @@ const config = {
           foreground: "hsl(var(--sidebar-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           primary: "hsl(var(--sidebar-primary))",
           "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["Inter var", ...fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {
@@ -85,14 +81,18 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "boost": {
+          "0%": { transform: "translateY(0)", opacity: "1" },
+          "50%": { transform: "translateY(-10px)", opacity: "0.7" },
+          "100%": { transform: "translateY(-20px)", opacity: "0" }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "boost": "boost 0.7s ease-out"
       },
     },
   },
-  plugins: [tailwindAnimate, tailwindTypography],
+  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
 } satisfies Config;
-
-export default config;

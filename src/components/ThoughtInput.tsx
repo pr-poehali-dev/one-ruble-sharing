@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import Icon from '@/components/ui/icon';
 
 interface ThoughtInputProps {
   onAddThought: (content: string) => void;
@@ -17,8 +18,8 @@ const ThoughtInput = ({ onAddThought }: ThoughtInputProps) => {
   const handleSubmit = () => {
     if (!content.trim()) {
       toast({
-        title: "Пустая мысль?",
-        description: "Напишите что-нибудь, прежде чем делиться с миром!",
+        title: "Empty thought?",
+        description: "Write something before sharing with the world!",
       });
       return;
     }
@@ -31,29 +32,30 @@ const ThoughtInput = ({ onAddThought }: ThoughtInputProps) => {
       setContent('');
       setIsSubmitting(false);
       toast({
-        title: "Опубликовано!",
-        description: "Ваша мысль добавлена в ленту",
+        title: "Published!",
+        description: "Your idea has been added to the feed",
       });
     }, 500);
   };
 
   return (
-    <Card className="mb-6 border border-[#E5DEFF] bg-white">
+    <Card className="mb-6 border border-[#eaeaea] bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
       <CardContent className="pt-6">
         <Textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="А что если все скинутся вам по 1 рублю?"
-          className="min-h-[100px] resize-none border-[#E5DEFF] focus:border-[#9b87f5] transition-colors"
+          placeholder="What if everyone boosted your idea with just $1?"
+          className="min-h-[120px] resize-none border-[#eaeaea] focus:border-[#3562FF] transition-colors"
         />
       </CardContent>
-      <CardFooter className="justify-end border-t border-[#F3F3F3] py-3 px-6">
+      <CardFooter className="justify-end border-t border-[#eaeaea] py-3 px-6 bg-[#fafafa]">
         <Button 
           onClick={handleSubmit} 
           disabled={isSubmitting}
-          className="bg-[#9b87f5] hover:bg-[#7E69AB] text-white"
+          className="bg-[#3562FF] hover:bg-[#1E40AF] text-white rounded-full px-5"
         >
-          {isSubmitting ? 'Публикация...' : 'Поделиться мыслью'}
+          <Icon name="SendHorizonal" className="h-4 w-4 mr-2" />
+          {isSubmitting ? 'Publishing...' : 'Share Idea'}
         </Button>
       </CardFooter>
     </Card>
