@@ -1,9 +1,8 @@
-
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { IconProps } from "lucide-react";
 import Icon from "@/components/ui/icon";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -17,18 +16,16 @@ interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
 
 export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <nav
-      className={cn(
-        "flex space-y-1 lg:space-y-2 flex-col",
-        className
-      )}
+      className={cn("flex space-y-1 lg:space-y-2 flex-col", className)}
       {...props}
     >
       {items.map((item) => {
         const isActive = location.pathname === item.href;
-        
+
         return (
           <Link
             key={item.href}
@@ -39,15 +36,19 @@ export function SidebarNav({ className, items, ...props }: SidebarNavProps) {
                 ? "bg-accent text-accent-foreground hover:bg-accent hover:text-accent-foreground"
                 : "hover:bg-muted hover:text-accent-foreground",
               "justify-start gap-2 px-3",
-              className
+              className,
             )}
           >
-            <Icon 
-              name={item.icon} 
+            <Icon
+              name={item.icon}
               className={cn(
                 "h-5 w-5 shrink-0",
-                item.color ? `text-${item.color}` : isActive ? "text-accent-foreground" : "text-muted-foreground"
-              )} 
+                item.color
+                  ? `text-${item.color}`
+                  : isActive
+                    ? "text-accent-foreground"
+                    : "text-muted-foreground",
+              )}
             />
             <span>{item.title}</span>
             {item.badge && (

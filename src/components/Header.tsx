@@ -1,7 +1,6 @@
-
-import { Button } from '@/components/ui/button';
-import Icon from '@/components/ui/icon';
-import { BrandLogo } from './BrandLogo';
+import { Button } from "@/components/ui/button";
+import Icon from "@/components/ui/icon";
+import { BrandLogo } from "./BrandLogo";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -22,7 +21,9 @@ const Header = () => {
         <div className="flex items-center md:w-64 lg:w-64">
           <div className="flex items-center md:justify-center">
             <BrandLogo className="h-8 w-8 mr-2" />
-            <div className="font-bold text-xl text-[#212121]">Coin<span className="text-[#3562FF]">Boost</span></div>
+            <div className="font-bold text-xl text-[#212121]">
+              Coin<span className="text-[#3562FF]">Boost</span>
+            </div>
           </div>
         </div>
 
@@ -64,7 +65,11 @@ const Header = () => {
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full h-9 w-9 p-0">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full h-9 w-9 p-0"
+              >
                 <Avatar className="h-9 w-9">
                   <AvatarImage src="https://github.com/shadcn.png" alt="User" />
                   <AvatarFallback>ME</AvatarFallback>
@@ -74,15 +79,24 @@ const Header = () => {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="flex items-center">
+              <DropdownMenuItem
+                className="flex items-center"
+                onClick={() => navigate("/profile")}
+              >
                 <Icon name="User" className="mr-2 h-4 w-4" />
                 <span>Profile</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center">
+              <DropdownMenuItem
+                className="flex items-center"
+                onClick={() => navigate("/analytics")}
+              >
                 <Icon name="CreditCard" className="mr-2 h-4 w-4" />
                 <span>Billing</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center">
+              <DropdownMenuItem
+                className="flex items-center"
+                onClick={() => navigate("/profile")}
+              >
                 <Icon name="Settings" className="mr-2 h-4 w-4" />
                 <span>Settings</span>
               </DropdownMenuItem>

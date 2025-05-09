@@ -13,8 +13,8 @@ export const BrandLogo: React.FC<BrandLogoProps> = (props) => {
       stroke="currentColor"
       {...props}
     >
-      {/* Основная монета */}
-      <circle cx="32" cy="32" r="28" fill="#3562FF" stroke="#212121" strokeWidth="2" />
+      {/* Основная монета с обновленным дизайном */}
+      <circle cx="32" cy="32" r="30" fill="#3562FF" stroke="#212121" strokeWidth="2" />
       
       {/* Символ стрелки роста/буста внутри монеты */}
       <path 
@@ -24,10 +24,6 @@ export const BrandLogo: React.FC<BrandLogoProps> = (props) => {
         strokeLinecap="round" 
         strokeLinejoin="round" 
       />
-      
-      {/* Маленькие монеты, показывающие рост/буст */}
-      <circle cx="18" cy="46" r="8" fill="#F5F8FF" stroke="#212121" strokeWidth="2" />
-      <circle cx="46" cy="46" r="8" fill="#F5F8FF" stroke="#212121" strokeWidth="2" />
     </svg>
   );
 };
