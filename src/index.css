@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 220 33% 98%;
+    --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -13,35 +13,27 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 221 83% 60%;
+    /* Facebook blue */
+    --primary: 214 89% 52%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 214 32% 91%;
+    --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 221 100% 96%;
-    --accent-foreground: 221 83% 60%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 221 83% 60%;
+    --ring: 214 89% 52%;
 
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
@@ -54,7 +46,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 221 83% 60%;
+    --primary: 214 89% 52%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -71,16 +63,7 @@
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 221 83% 60%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --ring: 214 89% 52%;
   }
 }
 
@@ -97,18 +80,19 @@
   }
 }
 
-@keyframes pulse-border {
+/* Стили анимации для кнопки "Отправить 1₽" */
+@keyframes pulse-boost {
   0% {
-    box-shadow: 0 0 0 0 rgba(53, 98, 255, 0.4);
+    transform: scale(1);
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(53, 98, 255, 0);
+  50% {
+    transform: scale(1.05);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(53, 98, 255, 0);
+    transform: scale(1);
   }
 }
 
-.pulse-border {
-  animation: pulse-border 2s infinite;
+.animate-boost {
+  animation: pulse-boost 0.5s ease-in-out;
 }

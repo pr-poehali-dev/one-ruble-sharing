@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ const ThoughtCard = ({
   content,
   date,
   donationsCount,
-  donationCurrency = "$",
+  donationCurrency = "₽",
 }: ThoughtCardProps) => {
   const [donations, setDonations] = useState(donationsCount);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -31,16 +32,18 @@ const ThoughtCard = ({
     setDonations(donations + 1);
     setIsAnimating(true);
     toast({
-      title: "Donation sent!",
-      description: `You've boosted this idea with ${donationCurrency}1`,
+      title: "Рубль отправлен!",
+      description: `Вы поддержали эту идею на ${donationCurrency}1`,
       duration: 3000,
     });
     setTimeout(() => setIsAnimating(false), 700);
   };
 
-  const formattedDate = new Date(date).toLocaleDateString(undefined, {
+  const formattedDate = new Date(date).toLocaleDateString("ru-RU", {
     day: "numeric",
     month: "short",
+    hour: "2-digit",
+    minute: "2-digit"
   });
 
   const getInitials = (name: string) => {
@@ -53,34 +56,34 @@ const ThoughtCard = ({
   };
 
   return (
-    <Card className="mb-4 border border-[#eaeaea] bg-white hover:shadow-md transition-shadow duration-200 overflow-hidden">
-      <CardContent className="pt-6">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center">
-            <Avatar className="h-8 w-8 mr-2 border border-[#eaeaea]">
-              <AvatarImage src={authorAvatar} />
-              <AvatarFallback className="bg-[#F5F8FF] text-[#3562FF]">
-                {getInitials(author)}
-              </AvatarFallback>
-            </Avatar>
-            <div className="font-medium text-[#212121]">{author}</div>
+    <Card className="mb-4 border border-[#dddfe2] bg-white hover:shadow-sm transition-shadow duration-200">
+      <CardContent className="pt-4">
+        <div className="mb-2 flex items-center">
+          <Avatar className="h-9 w-9 mr-2 border border-[#dddfe2]">
+            <AvatarImage src={authorAvatar} alt={author} />
+            <AvatarFallback className="bg-[#E4E6EB] text-[#65676B]">
+              {getInitials(author)}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <div className="font-medium text-[#050505]">{author}</div>
+            <div className="text-xs text-[#65676B]">{formattedDate}</div>
           </div>
-          <div className="text-sm text-muted-foreground">{formattedDate}</div>
         </div>
-        <p className="text-[#333333] text-base leading-relaxed">{content}</p>
+        <p className="text-[#050505] text-base leading-relaxed my-3">{content}</p>
       </CardContent>
-      <CardFooter className="flex justify-between border-t border-[#eaeaea] py-3 px-6 bg-[#fafafa]">
-        <span className="text-sm text-muted-foreground flex items-center">
-          <Icon name="Coins" className="mr-1 text-[#3562FF]" size={16} />
-          {donations} {donationCurrency}
+      <CardFooter className="flex justify-between border-t border-[#dddfe2] py-2 px-4">
+        <span className="text-sm text-[#65676B] flex items-center">
+          <Icon name="Users" className="mr-1" size={16} />
+          {donations} поддержали
         </span>
         <Button
           onClick={handleDonate}
           variant="ghost"
-          className={`text-[#3562FF] hover:text-[#1E40AF] hover:bg-[#F5F8FF] rounded-full px-4 ${isAnimating ? "animate-boost" : ""}`}
+          className={`text-[#1877F2] hover:bg-[#F0F2F5] rounded-md ${isAnimating ? "animate-boost" : ""}`}
         >
-          <Icon name="ArrowUpCircle" className="h-4 w-4 mr-1" />
-          Boost {donationCurrency}1
+          <Icon name="Send" className="h-4 w-4 mr-1" />
+          Отправить {donationCurrency}1
         </Button>
       </CardFooter>
     </Card>

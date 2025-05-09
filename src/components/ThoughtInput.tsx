@@ -18,8 +18,8 @@ const ThoughtInput = ({ onAddThought }: ThoughtInputProps) => {
   const handleSubmit = () => {
     if (!content.trim()) {
       toast({
-        title: "Empty thought?",
-        description: "Write something before sharing with the world!",
+        title: "Пустая мысль?",
+        description: "Напишите что-нибудь, прежде чем делиться с миром!",
       });
       return;
     }
@@ -32,30 +32,30 @@ const ThoughtInput = ({ onAddThought }: ThoughtInputProps) => {
       setContent('');
       setIsSubmitting(false);
       toast({
-        title: "Published!",
-        description: "Your idea has been added to the feed",
+        title: "Опубликовано!",
+        description: "Ваша идея добавлена в ленту",
       });
     }, 500);
   };
 
   return (
-    <Card className="mb-6 border border-[#eaeaea] bg-white shadow-sm hover:shadow-md transition-shadow duration-200">
-      <CardContent className="pt-6">
+    <Card className="mb-6 border border-[#dddfe2] bg-white shadow-sm">
+      <CardContent className="pt-4">
         <Textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          placeholder="What if everyone boosted your idea with just $1?"
-          className="min-h-[120px] resize-none border-[#eaeaea] focus:border-[#3562FF] transition-colors"
+          placeholder="А что если бы каждый отправил мне всего 1 рубль?"
+          className="min-h-[100px] resize-none border-[#dddfe2] focus:border-[#1877F2] transition-colors p-3"
         />
       </CardContent>
-      <CardFooter className="justify-end border-t border-[#eaeaea] py-3 px-6 bg-[#fafafa]">
+      <CardFooter className="justify-end border-t border-[#dddfe2] py-2 px-4 bg-[#F0F2F5]">
         <Button 
           onClick={handleSubmit} 
           disabled={isSubmitting}
-          className="bg-[#3562FF] hover:bg-[#1E40AF] text-white rounded-full px-5"
+          className="bg-[#1877F2] hover:bg-[#166FE5] text-white rounded-md"
         >
-          <Icon name="SendHorizonal" className="h-4 w-4 mr-2" />
-          {isSubmitting ? 'Publishing...' : 'Share Idea'}
+          <Icon name="Send" className="h-4 w-4 mr-2" />
+          {isSubmitting ? 'Публикуем...' : 'Опубликовать'}
         </Button>
       </CardFooter>
     </Card>

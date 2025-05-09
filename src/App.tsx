@@ -7,13 +7,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
-// Создаем заглушки для страниц, которые будут добавлены позже
+// Создаем простую страницу-заглушку для переходов по ссылкам
 const PlaceholderPage = ({ title }: { title: string }) => (
-  <div className="flex min-h-screen flex-col md:pl-64 pt-16">
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">{title}</h1>
-      <p className="text-muted-foreground">
-        Эта страница находится в разработке. Скоро здесь появится больше контента!
+  <div className="flex min-h-screen flex-col md:pl-[280px] pt-14 bg-[#F0F2F5]">
+    <div className="container max-w-2xl px-4 py-6">
+      <h1 className="text-2xl font-bold mb-4 text-[#050505]">{title}</h1>
+      <p className="text-[#65676B] bg-white p-4 rounded-lg border border-[#dddfe2]">
+        Эта страница находится в разработке. Основная идея нашего сервиса - собирать по рублю с каждого пользователя для поддержки интересных идей.
       </p>
     </div>
   </div>
@@ -31,15 +31,14 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            {/* Временные страницы, которые будут заменены на настоящие компоненты в будущем */}
-            <Route path="/explore" element={<PlaceholderPage title="Explore - Исследуйте интересные идеи" />} />
-            <Route path="/my-boosts" element={<PlaceholderPage title="My Boosts - Ваши поддержанные идеи" />} />
-            <Route path="/notifications" element={<PlaceholderPage title="Уведомления" />} />
+            {/* Временные страницы для навигации */}
+            <Route path="/trending" element={<PlaceholderPage title="Популярные идеи" />} />
+            <Route path="/recent" element={<PlaceholderPage title="Недавние идеи" />} />
             <Route path="/saved" element={<PlaceholderPage title="Сохраненные идеи" />} />
-            <Route path="/challenges" element={<PlaceholderPage title="Challenges - Участвуйте в челленджах" />} />
-            <Route path="/analytics" element={<PlaceholderPage title="Analytics - Статистика и аналитика" />} />
-            <Route path="/communities" element={<PlaceholderPage title="Communities - Сообщества по интересам" />} />
+            <Route path="/wallet" element={<PlaceholderPage title="Мой кошелёк" />} />
+            <Route path="/about" element={<PlaceholderPage title="О сервисе РубльОтКаждого" />} />
             <Route path="/profile" element={<PlaceholderPage title="Ваш профиль" />} />
+            <Route path="/settings" element={<PlaceholderPage title="Настройки" />} />
             
             {/* Редирект со всех остальных путей на страницу 404 */}
             <Route path="*" element={<NotFound />} />

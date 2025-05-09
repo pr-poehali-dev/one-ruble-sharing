@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { BrandLogo } from "./BrandLogo";
@@ -13,16 +14,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Bell } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-20 h-16 bg-white border-b border-[#eaeaea] flex items-center px-4 md:px-6">
+    <header className="fixed top-0 left-0 right-0 z-20 h-14 bg-white border-b border-[#dddfe2] flex items-center px-4">
       <div className="flex items-center justify-between w-full">
-        <div className="flex items-center md:w-64 lg:w-64">
-          <div className="flex items-center md:justify-center">
+        <div className="flex items-center">
+          <div className="flex items-center" onClick={() => navigate("/")} style={{cursor: "pointer"}}>
             <BrandLogo className="h-8 w-8 mr-2" />
-            <div className="font-bold text-xl text-[#212121]">
-              Coin<span className="text-[#3562FF]">Boost</span>
+            <div className="font-bold text-xl text-[#050505]">
+              Рубль<span className="text-[#1877F2]">ОтКаждого</span>
             </div>
           </div>
         </div>
@@ -31,8 +35,8 @@ const Header = () => {
           <div className="relative w-full">
             <Input
               type="search"
-              placeholder="Search ideas, challenges, users..."
-              className="w-full bg-[#F5F8FF] border-[#eaeaea] pl-10 focus-visible:ring-[#3562FF]"
+              placeholder="Поиск идей и людей..."
+              className="w-full bg-[#F0F2F5] border-[#dddfe2] pl-10"
             />
             <Icon
               name="Search"
@@ -48,19 +52,10 @@ const Header = () => {
             className="relative text-muted-foreground"
           >
             <Bell className="h-5 w-5" />
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center bg-[#3562FF]">
+            <Badge className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center bg-[#1877F2]">
               3
             </Badge>
-            <span className="sr-only">Notifications</span>
-          </Button>
-
-          <Button
-            variant="outline"
-            size="sm"
-            className="hidden sm:flex gap-2 border-[#eaeaea] text-[#3562FF] hover:bg-[#F5F8FF] hover:text-[#1E40AF]"
-          >
-            <Icon name="Plus" className="h-4 w-4" />
-            <span>Create Goal</span>
+            <span className="sr-only">Уведомления</span>
           </Button>
 
           <DropdownMenu>
@@ -72,38 +67,38 @@ const Header = () => {
               >
                 <Avatar className="h-9 w-9">
                   <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-                  <AvatarFallback>ME</AvatarFallback>
+                  <AvatarFallback>МЕ</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>Мой аккаунт</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem
                 className="flex items-center"
                 onClick={() => navigate("/profile")}
               >
                 <Icon name="User" className="mr-2 h-4 w-4" />
-                <span>Profile</span>
+                <span>Профиль</span>
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center"
-                onClick={() => navigate("/analytics")}
+                onClick={() => navigate("/wallet")}
               >
-                <Icon name="CreditCard" className="mr-2 h-4 w-4" />
-                <span>Billing</span>
+                <Icon name="Wallet" className="mr-2 h-4 w-4" />
+                <span>Мой кошелёк</span>
               </DropdownMenuItem>
               <DropdownMenuItem
                 className="flex items-center"
-                onClick={() => navigate("/profile")}
+                onClick={() => navigate("/settings")}
               >
                 <Icon name="Settings" className="mr-2 h-4 w-4" />
-                <span>Settings</span>
+                <span>Настройки</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="flex items-center">
                 <Icon name="LogOut" className="mr-2 h-4 w-4" />
-                <span>Log out</span>
+                <span>Выйти</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

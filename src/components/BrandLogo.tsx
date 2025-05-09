@@ -13,16 +13,19 @@ export const BrandLogo: React.FC<BrandLogoProps> = (props) => {
       stroke="currentColor"
       {...props}
     >
-      {/* Основная монета с обновленным дизайном */}
-      <circle cx="32" cy="32" r="30" fill="#3562FF" stroke="#212121" strokeWidth="2" />
+      {/* Простая, запоминающаяся монета с символом "1" внутри */}
+      <circle cx="32" cy="32" r="30" fill="#1877F2" stroke="#1877F2" strokeWidth="2" />
       
-      {/* Символ стрелки роста/буста внутри монеты */}
+      {/* Цифра "1" и символ рубля ₽ */}
       <path 
-        d="M20 32L32 20L44 32M32 20V44" 
+        d="M26 20h6v24h-6v-24z" 
+        fill="white" 
+      />
+      <path 
+        d="M38 32h-12 M38 26h-6" 
         stroke="white" 
         strokeWidth="4" 
         strokeLinecap="round" 
-        strokeLinejoin="round" 
       />
     </svg>
   );
