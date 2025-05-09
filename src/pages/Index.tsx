@@ -3,9 +3,14 @@ import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import ThoughtCard from '@/components/ThoughtCard';
 import ThoughtInput from '@/components/ThoughtInput';
-import { BrandLogo } from '@/components/BrandLogo';
+import Sidebar from '@/components/Sidebar';
 import { Button } from '@/components/ui/button';
 import Icon from '@/components/ui/icon';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import TrendingTopics from '@/components/TrendingTopics';
+import GoalProgress from '@/components/GoalProgress';
+import BoostLeaderboard from '@/components/BoostLeaderboard';
+import ChallengeCard from '@/components/ChallengeCard';
 
 // Начальные данные для демонстрации
 const initialThoughts = [
@@ -35,6 +40,16 @@ const initialThoughts = [
   }
 ];
 
+const featuredChallenge = {
+  title: "Start a Micro-Business",
+  description: "Launch a small business with a minimal budget. Document your journey and get boosted!",
+  reward: "$500 Prize Pool",
+  daysLeft: 12,
+  participants: 342,
+  category: "Business",
+  difficulty: "medium" as const
+};
+
 const Index = () => {
   const [thoughts, setThoughts] = useState(initialThoughts);
   const [isLoading, setIsLoading] = useState(true);
@@ -61,70 +76,108 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] pb-16">
+    <div className="min-h-screen bg-[#F9FAFC]">
       <Header />
+      <Sidebar />
       
-      <main className="pt-24 px-4 max-w-2xl mx-auto">
-        <section className="mb-12 text-center">
-          <div className="flex justify-center mb-4">
-            <BrandLogo className="h-20 w-20 text-[#3562FF]" />
-          </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-center text-[#212121] mb-4">
-            What if everyone boosted you with <span className="text-[#3562FF]">$1</span>?
-          </h1>
-          <p className="text-center text-[#555555] mb-8 max-w-lg mx-auto">
-            Share your ideas, dreams, and projects. 
-            Let people support you with micro-boosts of just $1.
-          </p>
-          
-          <div className="flex flex-wrap justify-center gap-2 mb-8">
-            <Button variant="outline" className="rounded-full border-[#eaeaea] bg-white shadow-sm">
-              <Icon name="TrendingUp" className="h-4 w-4 mr-1 text-[#3562FF]" />
-              Trending
-            </Button>
-            <Button variant="outline" className="rounded-full border-[#eaeaea] bg-white shadow-sm">
-              <Icon name="Star" className="h-4 w-4 mr-1 text-[#3562FF]" />
-              Featured
-            </Button>
-            <Button variant="outline" className="rounded-full border-[#eaeaea] bg-white shadow-sm">
-              <Icon name="Sparkles" className="h-4 w-4 mr-1 text-[#3562FF]" />
-              New
-            </Button>
-          </div>
-          
-          <ThoughtInput onAddThought={handleAddThought} />
-        </section>
-        
-        <section>
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-medium text-[#212121]">Global Feed</h2>
-            <Button variant="ghost" size="sm" className="text-[#3562FF]">
-              <Icon name="RefreshCw" className="h-4 w-4 mr-1" />
-              Refresh
-            </Button>
-          </div>
-          
-          {isLoading ? (
-            Array(3).fill(0).map((_, index) => (
-              <div key={index} className="mb-4 animate-pulse">
-                <div className="h-40 bg-gray-200 rounded-lg"></div>
+      <main className="flex min-h-screen flex-col md:pl-64 pt-16">
+        <div className="container px-4 py-6 md:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Main Feed Area */}
+          <div className="lg:col-span-2">
+            <Tabs defaultValue="feed" className="w-full">
+              <div className="flex justify-between items-center mb-4">
+                <TabsList>
+                  <TabsTrigger value="feed" className="flex items-center">
+                    <Icon name="Layers" className="mr-1 h-4 w-4" />
+                    Feed
+                  </TabsTrigger>
+                  <TabsTrigger value="trending" className="flex items-center">
+                    <Icon name="TrendingUp" className="mr-1 h-4 w-4" />
+                    Trending
+                  </TabsTrigger>
+                  <TabsTrigger value="following" className="flex items-center">
+                    <Icon name="Users" className="mr-1 h-4 w-4" />
+                    Following
+                  </TabsTrigger>
+                </TabsList>
+                
+                <Button variant="ghost" size="sm" className="text-primary">
+                  <Icon name="RefreshCw" className="h-4 w-4 mr-1" />
+                  Refresh
+                </Button>
               </div>
-            ))
-          ) : (
-            thoughts.map(thought => (
-              <ThoughtCard
-                key={thought.id}
-                id={thought.id}
-                author={thought.author}
-                authorAvatar={thought.authorAvatar}
-                content={thought.content}
-                date={thought.date}
-                donationsCount={thought.donationsCount}
-                donationCurrency="$"
-              />
-            ))
-          )}
-        </section>
+              
+              <TabsContent value="feed" className="mt-0">
+                <ThoughtInput onAddThought={handleAddThought} />
+                <TrendingTopics />
+                
+                <div className="mt-4">
+                  {isLoading ? (
+                    Array(3).fill(0).map((_, index) => (
+                      <div key={index} className="mb-4 animate-pulse">
+                        <div className="h-40 bg-gray-200 rounded-lg"></div>
+                      </div>
+                    ))
+                  ) : (
+                    thoughts.map(thought => (
+                      <ThoughtCard
+                        key={thought.id}
+                        id={thought.id}
+                        author={thought.author}
+                        authorAvatar={thought.authorAvatar}
+                        content={thought.content}
+                        date={thought.date}
+                        donationsCount={thought.donationsCount}
+                        donationCurrency="$"
+                      />
+                    ))
+                  )}
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="trending">
+                <div className="flex items-center justify-center h-40 bg-muted/30 rounded-lg border border-dashed">
+                  <div className="text-center">
+                    <Icon name="TrendingUp" className="mx-auto h-8 w-8 text-muted-foreground" />
+                    <h3 className="mt-2 text-lg font-medium">Trending Content</h3>
+                    <p className="text-sm text-muted-foreground">Discover what's popular right now</p>
+                  </div>
+                </div>
+              </TabsContent>
+              
+              <TabsContent value="following">
+                <div className="flex items-center justify-center h-40 bg-muted/30 rounded-lg border border-dashed">
+                  <div className="text-center">
+                    <Icon name="Users" className="mx-auto h-8 w-8 text-muted-foreground" />
+                    <h3 className="mt-2 text-lg font-medium">Following Feed</h3>
+                    <p className="text-sm text-muted-foreground">Content from creators you follow</p>
+                  </div>
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
+          
+          {/* Right Sidebar */}
+          <div className="space-y-6">
+            <GoalProgress 
+              title="Launch My Photo Exhibition"
+              currentAmount={620}
+              targetAmount={1000}
+              backers={58}
+              deadline="2025-06-15"
+            />
+            
+            <BoostLeaderboard />
+            
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium flex items-center">
+                <Icon name="Zap" className="mr-2 h-5 w-5 text-amber-500" />
+                Featured Challenge
+              </h3>
+              <ChallengeCard {...featuredChallenge} />
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );
